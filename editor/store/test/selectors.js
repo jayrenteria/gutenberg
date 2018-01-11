@@ -2223,6 +2223,7 @@ describe( 'selectors', () => {
 		} );
 	} );
 
+<<<<<<< HEAD
 	describe( 'getMostFrequentlyUsedBlocks', () => {
 		it( 'should have paragraph and image to bring frequently used blocks up to three blocks', () => {
 			const noUsage = { preferences: { blockUsage: {} } };
@@ -2355,6 +2356,9 @@ describe( 'selectors', () => {
 	} );
 
 	describe( 'getRecentInserterItems', () => {
+=======
+	describe( 'getRecentlyUsedBlocks', () => {
+>>>>>>> Editor: Bring back the trailing placeholder
 		it( 'should return the most recently used blocks', () => {
 			const state = {
 				preferences: {
