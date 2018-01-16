@@ -7,7 +7,12 @@ import deepFreeze from 'deep-freeze';
 /**
  * WordPress dependencies
  */
-import { registerBlockType, unregisterBlockType, getBlockType } from '@wordpress/blocks';
+import {
+	registerCoreBlocks,
+	registerBlockType,
+	unregisterBlockType,
+	getBlockType,
+} from '@wordpress/blocks';
 
 /**
  * Internal dependencies
@@ -925,6 +930,10 @@ describe( 'state', () => {
 	} );
 
 	describe( 'preferences()', () => {
+		beforeAll( () => {
+			registerCoreBlocks();
+		} );
+
 		it( 'should apply all defaults', () => {
 			const state = preferences( undefined, {} );
 
