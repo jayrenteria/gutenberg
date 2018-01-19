@@ -15,7 +15,7 @@ import classnames from 'classnames';
  */
 import './editor.scss';
 import './style.scss';
-import { registerBlockType, createBlock } from '../../api';
+import { createBlock } from '../../api';
 import Editable from '../../editable';
 import MediaUpload from '../../media-upload';
 import ImagePlaceHolder from '../../image-placeholder';
@@ -27,7 +27,9 @@ import RangeControl from '../../inspector-controls/range-control';
 
 const validAlignments = [ 'left', 'center', 'right', 'wide', 'full' ];
 
-export const registerCoverImageBlock = () => registerBlockType( 'core/cover-image', {
+export const name = 'core/cover-image';
+
+export const settings = {
 	title: __( 'Cover Image' ),
 
 	description: __( 'Cover Image is a bold image block with an optional title.' ),
@@ -215,7 +217,7 @@ export const registerCoverImageBlock = () => registerBlockType( 'core/cover-imag
 			</section>
 		);
 	},
-} );
+};
 
 function dimRatioToClass( ratio ) {
 	return ( ratio === 0 || ratio === 50 ) ?
