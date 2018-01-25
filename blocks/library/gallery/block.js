@@ -46,11 +46,14 @@ class GalleryBlock extends Component {
 		this.toggleImageCrop = this.toggleImageCrop.bind( this );
 		this.uploadFromFiles = this.uploadFromFiles.bind( this );
 		this.onRemoveImage = this.onRemoveImage.bind( this );
+		this.dragStart = this.dragStart.bind( this );
+		this.dragOver = this.dragOver.bind( this );
 		this.setImageAttributes = this.setImageAttributes.bind( this );
 		this.dropFiles = this.dropFiles.bind( this );
 
 		this.state = {
 			selectedImage: null,
+			dragging: null
 		};
 	}
 
@@ -95,6 +98,35 @@ class GalleryBlock extends Component {
 		this.setState({selectedImage: to});
 		setAttributes( { images: newImages } );
 		
+	}
+
+	dragStart(event, index) {
+		console.log('starting')
+  		event.dataTransfer.effectAllowed = 'move';
+  		event.dataTransfer.setData("text/html", null);
+  		this.setState({dragging: index});
+	}
+
+	dragOver(event) {
+		console.log('over')
+  		event.preventDefault();
+
+  		const over = event.currentTarget
+  		const from = this.state.dragging;
+  		let to = 0;
+  		console.log(over);
+  		console.log(from);
+  		console.log(to);
+
+  		// sort the images
+  		// const { attributes: { images }, setAttributes } = this.props;
+  		// const newImages = Array.from(images);
+  		// newImages.splice(to, 0, newImages.splice(from,1)[0]);
+  		// setAttributes( { images: newImages } );
+	}
+
+	dragEnd() {
+		console.log('done dragging')
 	}
 
 	onSelectImages( imgs ) {
@@ -273,6 +305,9 @@ class GalleryBlock extends Component {
 							onReorder={(event, direction) => this.onReorderImage( event, index, direction )}
 							isFirst={index === 0}
 							isLast={index === images.length - 1}
+							dragStart={(event) => this.dragStart(event, index)}
+							dragOver={this.dragOver}
+							dragEnd={this.dragEnd}
 							setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
 						/>
 					</li>

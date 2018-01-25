@@ -21,7 +21,7 @@ class GalleryImage extends Component {
 	}
 
 	render() {
-		const { url, alt, id, linkTo, link, isSelected, onClick, onRemove, onReorder, isFirst, isLast } = this.props;
+		const { url, alt, id, linkTo, link, isSelected, onClick, onRemove, onReorder, isFirst, isLast, dragStart, dragOver, dragEnd } = this.props;
 
 		let href;
 
@@ -34,7 +34,7 @@ class GalleryImage extends Component {
 				break;
 		}
 
-		const img = url ? <img src={ url } alt={ alt } data-id={ id } /> : <Spinner />;
+		const img = url ? <img src={ url } alt={ alt } data-id={ id }/> : <Spinner />;
 
 		const className = classnames( {
 			'is-selected': isSelected,
@@ -44,7 +44,7 @@ class GalleryImage extends Component {
 		// Disable reason: Each block can be selected by clicking on it and we should keep the same saved markup
 		/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/onclick-has-role, jsx-a11y/click-events-have-key-events */
 		return (
-			<figure className={ className } onClick={ onClick } tabindex={0} onKeyPress={ onClick }>
+			<figure className={ className } onClick={ onClick } tabindex={0} onKeyPress={ onClick }  draggable="true" onDragStart={dragStart} onDragOver={dragOver} onDragEnd={dragEnd}>
 				{ isSelected &&
 					<div>
 						<div className="blocks-gallery-item__inline-menu">
